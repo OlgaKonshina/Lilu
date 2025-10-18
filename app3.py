@@ -24,9 +24,47 @@ st.set_page_config(
 
 
 def reset_session():
-    """Сброс сессии"""
-    for key in list(st.session_state.keys()):
-        del st.session_state[key]
+    """Сброс сессии с обработкой ошибок Streamlit DOM"""
+    try:
+        # Останавливаем голосовые процессы
+        if 'voice_dialog' in st.session_state:
+            try:
+                st.session_state.voice_dialog.stop_dialog()
+            except:
+                pass
+        if 'voice_additional' in st.session_state:
+            try:
+                st.session_state.voice_additional.stop_questions()
+            except:
+                pass
+        
+        # Сохраняем только системные объекты
+        system_objects = {}
+        for key in ['voice_dialog', 'voice_additional', 'doctor_matcher', 'text_complaints_collector']:
+            if key in st.session_state:
+                system_objects[key] = st.session_state[key]
+        
+        # Мягкая очистка
+        keys_to_remove = [key for key in st.session_state.keys() if key not in system_objects]
+        for key in keys_to_remove:
+            try:
+                del st.session_state[key]
+            except:
+                pass
+        
+        # Восстанавливаем системные объекты
+        for key, obj in system_objects.items():
+            st.session_state[key] = obj
+            
+        # Обязательные поля
+        st.session_state.current_step = 0
+        st.session_state.user_data = {}
+        
+    except Exception as e:
+        # Если все сломалось - полный сброс
+        st.session_state.clear()
+        st.session_state.current_step = 0
+        st.session_state.user_data = {}
 
 
 def main():
