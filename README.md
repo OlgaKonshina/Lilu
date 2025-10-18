@@ -29,7 +29,7 @@
 
 ## 📊 Как это работает
 
-
+![Снимок экрана от 2025-10-18 23-27-33]([https://github.com/OlgaKonshina/MLOps_URFU/assets/149665681/03244bce-8fdd-4900-b773-9af5f5bc5a19](https://github.com/OlgaKonshina/Lilu/blob/main/))
 
 
 ### 🔧 Технологический стек
