@@ -2,8 +2,8 @@ import openai
 import streamlit as st
 
 # Настройки Yandex Cloud
-YANDEX_CLOUD_FOLDER = "b1gmi1g79pu16dqji44g"
-YANDEX_CLOUD_API_KEY = "AQVNx8awi4G6087LVxdTxdLb67dQQym9vC4PEmQe"
+YANDEX_CLOUD_FOLDER = ""
+YANDEX_CLOUD_API_KEY = ""
 
 # Инициализация клиента
 client = openai.OpenAI(
